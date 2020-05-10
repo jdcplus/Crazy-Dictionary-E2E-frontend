@@ -1,0 +1,45 @@
+<div class="card text-center vertical-center">
+
+  <div class="container-sm card-body text-left px-2 py-2">
+    <div class="mt-3 container-sm px-0 py-0">
+      <div class="my-auto px-0 py-0 row dict-search-card">
+        <h1 class="display-3 mb-3 mx-auto font-weight-normal page-title">Crazy Dictionary</h1>
+        <label for="inputWord" class="sr-only">Search Word</label>
+        <input [(ngModel)]="searchStr" type="text" id="inputword" class="form-control" placeholder="Enter word" required autofocus>
+        <button (click)="searchword()" [disabled]="!searchStr" class="btn btn-lg btn-primary btn-block my-3" type="submit">Search</button>
+      </div>
+
+      <div class="row result-card" *ngIf="wordHC && submitted">
+        <div class="card mx-auto shadow p-3 mb-5 bg-white rounded px-0 py-0" style="width: 36rem;">
+          <div class="card-body px-0 py-0">
+            <h1 class="display-3 card-title head-word-style">{{wordHC.headWord}}</h1>
+              <div *ngIf="wordHC.validWord">
+                <p class="h6 font-italic"> {{wordHC.functionalLabel}}</p>
+                <p class="h6"> \ {{wordHC.pronunciations}} \ </p>
+                <h4 class="card-title">Definition of <i>{{wordHC.headWord}}</i></h4>
+                <ul> <li class="card-text" *ngFor="let shortDef of wordHC.shortDefinition ">: {{shortDef}}</li> </ul>
+              </div>
+              <div *ngIf="!wordHC.validWord">
+                <h4 class="card-title">Do you mean ...</h4>
+                <ul> <li class="card-text" *ngFor="let wordSuggested of wordHC.validSuggestion "><a href="#" (click)="searchSuggestedWord(wordSuggested)">{{wordSuggested}}</a></li> </ul>
+              </div>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" role="alert" *ngIf="errorMessage">
+        Please try again with another word !
+      </div>
+
+    </div>
+
+  </div>
+  <div class="card-footer container-fluid text-muted">
+    Created and Maintained by <a href="#">Jigar Chandvania</a>.
+    Open Sourced using <a href="https://en.wikipedia.org/wiki/MIT_License">MIT license</a>.
+    Check my repository for <a href="#">Frontend</a> and <a href="https://github.com/jdcplus/Crazy-Dictionary-E2E-backend">Backend</a>
+  </div>
+</div>
+
+
